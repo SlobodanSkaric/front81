@@ -1,4 +1,6 @@
 import React, { useCallback, useState, type ChangeEvent, type FormEvent } from "react";
+import { authServices } from "../Services/AuthServices";
+import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
     email?: string;  
@@ -12,10 +14,22 @@ const LoginForm: React.FC<LoginProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
 
-  const handleSubmit = (e: FormEvent) => {
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (e: FormEvent) => {
       e.preventDefault();
       setError(null);
-      setLoading(true);      
+      setLoading(true);   
+      
+      try{
+        await authServices.login({email, password});
+        navigate('/adminprofile', {replace: true});
+      }catch(err: any){
+        setError(err.message || "An unexpected error occurred");
+      }finally{
+        setLoading(false);
+      }
     };
 
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<string>>) =>{
