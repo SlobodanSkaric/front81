@@ -1,8 +1,14 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from  "./Components/HomePage";
-import Login from "./Components/Login";
-import UserProfile from './Components/UserProfile';
-import AdministratorProfile from './Components/AdministratorProfile';
+import Home from  "./Layouts/HomePage";
+import Login from "./Layouts/Login";
+import UserProfile from './Layouts/UserProfile';
+import AdministratorProfile from './Layouts/AdministratorProfile';
+import JobLists from './Pages/JobLists';
+import CreateListJob from './Pages/CreateListJob';
+import CurentState from './Pages/CurentState';
+import Customers from './Pages/Customers';
+import Services from './Pages/Services';
+import AdministratorsPanel from './Pages/AdministratorsPanel';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +25,36 @@ const router = createBrowserRouter([
   },
   {
     path: "/adminprofile",
-    element: <AdministratorProfile />
+    element: <AdministratorProfile />,
+    children:[
+      {
+        path: "showlistjob",
+        element: <JobLists />
+      },
+      {
+        path: "createlistjob",
+        element:<CreateListJob />
+      },
+      {
+        path: "curentstate",
+        element:<CurentState />
+      },
+      {
+        path:"customers",
+        element:<Customers />
+      },
+      {
+        path: "services",
+        element: <Services />
+      },
+      {
+        path: "administratorspanel",
+        element: <AdministratorsPanel />
+      },
+      {
+        path: "logout",
+      }
+    ]
   }
 
   ]);
