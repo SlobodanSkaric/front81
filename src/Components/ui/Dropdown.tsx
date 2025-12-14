@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Dropdown() {
     const [isOpen, setIsOpen] = useState(false);
-    const [firmName, setFirmName] = useState(false);   
+    const [firmName, setFirmName] = useState(true);   
     const [orderNumber, setOrderNumber] = useState(false);   
     const [status, setStatus] = useState(false);   
     const [date, setDate] = useState(false);
@@ -17,7 +17,7 @@ export default function Dropdown() {
         const handeleCliskOutside = (event: MouseEvent) =>{
                 if(menuRef.current && !menuRef.current.contains(event.target as Node)){
                     setIsOpen(false);
-                    setFirmName(false);
+                    setFirmName(true);
                     setOrderNumber(false);
                     setStatus(false);
                     setDate(false);
